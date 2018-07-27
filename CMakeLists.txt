@@ -23,6 +23,7 @@ add_executable(upnp
 target_include_directories(upnp SYSTEM PRIVATE miniupnp/miniupnpc)
 
 if(WIN32)
+    set_target_properties (upnp PROPERTIES COMPILE_FLAGS "-DMINIUPNP_STATICLIB")
 else(WIN32)
     set_target_properties (upnp PROPERTIES COMPILE_FLAGS "-std=c++14 -DMINIUPNP_STATICLIB")
 endif(WIN32)
