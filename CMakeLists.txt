@@ -4,8 +4,6 @@ project(upnp)
 include_directories (${CMAKE_SOURCE_DIR})
 
 #boost
-set(BOOST_ROOT "D:/boost_1_66_0")
-set(BOOST_INCLUDEDIR "D:/boost_1_66_0/include/boost-1_66")
 set(Boost_USE_STATIC_LIBS        ON)
 set(Boost_USE_MULTITHREADED      ON)
 include_directories (${Boost_INCLUDE_DIR})
@@ -24,6 +22,9 @@ add_executable(upnp
 
 target_include_directories(upnp SYSTEM PRIVATE miniupnp/miniupnpc)
 
-#set_target_properties (upnp PROPERTIES COMPILE_FLAGS -DMINIUPNP_STATICLIB)
+if(WIN32)
+else(WIN32)
+    set_target_properties (upnp PROPERTIES COMPILE_FLAGS "-std=c++14 -DMINIUPNP_STATICLIB")
+endif(WIN32)
 
 target_link_libraries(upnp libminiupnpc-static ${Boost_REGEX_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_DATE_TIME_LIBRARY})

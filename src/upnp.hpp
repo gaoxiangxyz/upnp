@@ -20,6 +20,7 @@ public:
 			FreeUPNPUrls(urls);
 		delete urls;
 		delete datas;
+		delete ext_port;
 	}
 
     void port_mapping(int in_port_a, int ex_port_a)
@@ -57,19 +58,21 @@ public:
 				std::cout << "ExternalIPAddress: " << external_ip_addr << std::endl;
 			}
 
-			////UPNP_AddPortMapping
-			//sprintf(ext_port, "%d", ex_port_a);
-			//char * in_port;
-			//sprintf(in_port, "%d", in_port_a);
-			//error = UPNP_AddPortMapping(urls->controlURL, datas->first.servicetype, ext_port, in_port, lan_addr, "gx-upnp", "TCP", nullptr, nullptr);
-			//if (error)
-			//{
-			//	std::cout << "UPNP_AddPortMapping fail." << std::endl;
-			//}
-			//else
-			//{
-			//	is_mapped = true;
-			//}
+			//UPNP_AddPortMapping	
+			ext_port = new char;		
+			sprintf(ext_port, "%d", ex_port_a);
+			char * in_port = new char;
+			sprintf(in_port, "%d", in_port_a);
+			error = UPNP_AddPortMapping(urls->controlURL, datas->first.servicetype, ext_port, in_port, lan_addr, "gx-upnp", "TCP", nullptr, nullptr);
+			if (error)
+			{
+				std::cout << "UPNP_AddPortMapping fail." << std::endl;
+			}
+			else
+			{
+				is_mapped = true;
+			}
+			delete in_port;
         }
         else
         {

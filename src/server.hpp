@@ -48,7 +48,7 @@ public:
 	void do_accept()
 	{
 		std::shared_ptr<bi::tcp::socket> socket(std::make_shared<bi::tcp::socket>(_io_service));
-		_acceptor.async_accept(*socket, [=](boost::system::error_code ec)
+		_acceptor.async_accept(*socket, [socket, this](boost::system::error_code ec)
 		{
 			if (ec)
 			{
