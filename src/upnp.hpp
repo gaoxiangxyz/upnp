@@ -71,6 +71,7 @@ public:
 			else
 			{
 				is_mapped = true;
+				std::cout << "add port mapping on external port:" << ex_port_a << std::endl;
 			}
 			delete in_port;
         }
