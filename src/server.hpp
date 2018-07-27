@@ -13,6 +13,20 @@ public:
 	{
 	}
 
+	~server()
+	{
+		try
+		{
+			_io_service.stop();
+		}
+		catch(std::exception const & e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		if(_io_thread.joinable())
+			_io_thread.join();
+	}
+
 	void start(std::string addr_a, uint16_t port_a)
 	{
 		boost::system::error_code ec;

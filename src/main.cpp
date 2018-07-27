@@ -13,7 +13,7 @@ int main()
 	server.start("0.0.0.0", in_port);
 
 	upnp up;
-	up.port_mapping(in_port, 43333);
+	up.port_mapping(in_port, 53333);
 
 	getchar();
 
