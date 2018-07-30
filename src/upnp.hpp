@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <miniupnp/miniupnpc/miniupnpc.h>
 #include <miniupnp/miniupnpc/upnpcommands.h>
 
@@ -42,7 +43,7 @@ public:
 		urls = new UPNPUrls;
 		datas = new IGDdatas;
 		char lan_addr[64];
-        int get_valid_IGD_result = UPNP_GetValidIGD(device_list, urls, datas, lan_addr, sizeof(lan_addr));
+        get_valid_IGD_result = UPNP_GetValidIGD(device_list, urls, datas, lan_addr, sizeof(lan_addr));
 
         if(get_valid_IGD_result == 1)
         {
