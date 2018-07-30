@@ -106,7 +106,9 @@ public:
 				{
 					std::cout << "desc:" << desc << ", host:" << rHost << ", external port:" << extPort << ", map to:" << intClient << ":" << intPort << std::endl;
 				}
-			} while (i++ < 9000);
+				else
+					break;
+			} while (true);
 		}
 	}
 
