@@ -50,6 +50,7 @@ public:
 			//UPNP_GetExternalIPAddress 
             char external_ip_addr[16];
 			int error = UPNP_GetExternalIPAddress(urls->controlURL, datas->first.servicetype, external_ip_addr);
+			std::cout << "urls->controlURL:" << urls->controlURL << ", datas->first.servicetype" << datas->first.servicetype << std::endl;
 			if (error)
 			{
 				std::cout << "UPNP_GetExternalIPAddress fail." << std::endl;
@@ -88,9 +89,9 @@ public:
 	{
 		if (get_valid_IGD_result > 0)
 		{
-			unsigned num = 0;
-			UPNP_GetPortMappingNumberOfEntries(urls->controlURL, datas->first.servicetype, &num);
-			for (unsigned i = 0; i < num; ++i)
+			std::cout << "urls->controlURL:" << urls->controlURL << ", datas->first.servicetype" << datas->first.servicetype << std::endl;
+			int i = 0;
+			do
 			{
 				char extPort[16];
 				char intClient[16];
@@ -100,13 +101,12 @@ public:
 				char enabled[4];
 				char rHost[64];
 				char duration[16];
-				UPNP_GetGenericPortMappingEntry(urls->controlURL, datas->first.servicetype, toString(i).c_str(), extPort, intClient, intPort, protocol, desc, enabled, rHost, duration);
-
-				std::cout << "external port:" << extPort << ", map to:" << intClient << ":" << intPort << std::endl;
-			}
-
-			if (num == 0)
-				std::cout << "no port mapping found" << std::endl;
+				int r = UPNP_GetGenericPortMappingEntry(urls->controlURL, datas->first.servicetype, toString(i).c_str(), extPort, intClient, intPort, protocol, desc, enabled, rHost, duration);
+				if (r == UPNPCOMMAND_SUCCESS)
+				{
+					std::cout << "desc:" << desc << ", host:" << rHost << ", external port:" << extPort << ", map to:" << intClient << ":" << intPort << std::endl;
+				}
+			} while (i++ < 9000);
 		}
 	}
 
