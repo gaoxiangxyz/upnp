@@ -16,6 +16,8 @@ int main()
 	up.port_mapping(in_port, 53333);
 	up.show_port_mapping();
 
+	std::cout << "press 'Enter' to exit" << std::endl;
+
 	getchar();
 
 	return 0;

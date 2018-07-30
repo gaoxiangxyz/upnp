@@ -87,6 +87,8 @@ public:
 
 	void show_port_mapping()
 	{
+		std::cout << "---------------show_port_mapping----------------------" << std::endl;
+
 		if (get_valid_IGD_result > 0)
 		{
 			std::cout << "urls->controlURL:" << urls->controlURL << ", datas->first.servicetype" << datas->first.servicetype << std::endl;
