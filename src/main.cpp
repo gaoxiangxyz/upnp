@@ -14,6 +14,7 @@ int main()
 
 	upnp up;
 	up.port_mapping(in_port, 53333);
+	up.show_port_mapping();
 
 	getchar();
 

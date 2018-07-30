@@ -83,6 +83,40 @@ public:
 		freeUPNPDevlist(device_list);
     }
 
+	void show_port_mapping()
+	{
+		if (get_valid_IGD_result > 0)
+		{
+			unsigned num = 0;
+			UPNP_GetPortMappingNumberOfEntries(urls->controlURL, datas->first.servicetype, &num);
+			for (unsigned i = 0; i < num; ++i)
+			{
+				char extPort[16];
+				char intClient[16];
+				char intPort[6];
+				char protocol[4];
+				char desc[80];
+				char enabled[4];
+				char rHost[64];
+				char duration[16];
+				UPNP_GetGenericPortMappingEntry(urls->controlURL, datas->first.servicetype, toString(i).c_str(), extPort, intClient, intPort, protocol, desc, enabled, rHost, duration);
+
+				std::cout << "external port:" << extPort << ", map to:" << intClient << ":" << intPort << std::endl;
+			}
+
+			if (num == 0)
+				std::cout << "no port mapping found" << std::endl;
+		}
+	}
+
+	template <class _T>
+	inline std::string toString(_T const& _t)
+	{
+		std::ostringstream o;
+		o << _t;
+		return o.str();
+	}
+
 private:
 	struct UPNPUrls * urls;
 	struct IGDdatas * datas;
