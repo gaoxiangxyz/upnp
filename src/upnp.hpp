@@ -108,6 +108,9 @@ public:
 				}
 				else
 					break;
+
+				i++;
+				
 			} while (true);
 		}
 	}
